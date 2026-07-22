@@ -6,7 +6,7 @@ def HomeMenu(accountList):
     print("\n====Dragons Hoard Inter-reality Banking services====\n")
     
     while True:
-        print("1: New Adventurer\n2: Party List\n3: Manage Party\n4: DM Stuff\n5: Exit")
+        print("1: New Adventurer\n2: Party List\n3: Manage Party\n4: DungeonMaster's Tools\n5: Flee") 
         choice = int(input("Please make a selection: "))
         match choice:
             case 1:
@@ -14,12 +14,16 @@ def HomeMenu(accountList):
                 account = accounts.Account(name)
                 accountList.append(account)
                 print(account.name +", Welcome to the Party. We hope you have coin!")
-                account.totalValueGold = int(input("How much gold are you giving us? Uh... How much is your worth in gold?\n"))
+                for coinType in account.currencies:
+                    amount = int(input(f"How many {coinType.__name__} coins do you have? "))
+                    account.currencies[coinType] = amount
+                account.UpdateTotalValue()
+                print(f"You have {account.totalValueGold} total in gold")
                 if account.totalValueGold >= 3000:
                     print("Exellent you're a good one.")
-                elif account.totalValueGold < 3000 and account.totalValueGold >= 1000:
-                    print("Eh, you're alright I guess, nothing special...")
-                elif account.totalValueGold < 1000:
+                elif account.totalValueGold >= 1000:
+                    print("Eh, you're alright...")
+                else:
                     print("Yikes, you're no good to us. Whatever. *oh right* Ahem WELCOME!")
 
             case 2:
@@ -32,23 +36,28 @@ def HomeMenu(accountList):
                 pass
 
             case 5:
-                print("Thanks for using Dragon's Hoard Banking! Thanks for your money.")
+                print("Thanks for using Dragon's Hoard Banking! Its saver with us then you.")
                 sys.exit(0)
 
 def AccountOptions(account):
     run = 1
     while run == 1:
         print("\n==== "+ account.name + "'s DashBoard===\n")
-        choice = int(input("What would you like to do with your account?\n1: Add Coin\n2: Remove Coin\n3: Convert Coin\n4: Purchase History\n5: Menu\nChoice: "))
-
+        print(f"===Your Worth: {account.totalValueGold}")
+        choice = int(input("What would you like to do with your account?\n1: Save Coin\n2: Spend Coin\n3: Convert Coin\n4: Purchase History\n5: Return to Menu\nChoice: "))
+        print("")
         match choice:
             case 1:
-                pass
+                # Allow to add multiple coins at once, probably a while loop to start, or prompt all and enter 0
+                print("What coin are you adding?")
 
             
 
             case 5:
                 run = 0
+
+def DmMenuOptions():
+    pass
 
 def Party_List(accountList):
     print("\n==== Party Accounts ====\n")

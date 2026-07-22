@@ -36,6 +36,12 @@ class Account():
             Gold: 0,
             Platinum: 0,   
         }
+    def UpdateTotalValue(self):
+        total = 0
+        for typeCoin, amount in self.currencies.items():
+            total += amount * typeCoin.valueOfGold
+        self.totalValueGold = round(total)
+
     def AddCoins(self,typeCoin,amount):
         pass
     def RemoveCoins(self,typeCoin,amount):
