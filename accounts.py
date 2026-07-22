@@ -43,7 +43,14 @@ class Account():
         self.totalValueGold = round(total)
 
     def AddCoins(self,typeCoin,amount):
-        pass
+        for typeCoin in self.currencies:
+            amount = int(input(f"How many {typeCoin.__name__} coins will you deposit?"))
+            self.currencies[typeCoin] += amount
+            self.UpdateTotalValue()
+        print(f"Crog our coin counter has finished sorting through your bag and made the requested deposit.\n Your new total value stands at {self.totalValueGold}\n Your collection is now the following")
+        for a in self.currencies:
+            print(f"{typeCoin.__name__}: {typeCoin.amount}")
+
     def RemoveCoins(self,typeCoin,amount):
         pass
     def ConvertCoins(self,typeCoin,amount,ToThisCoin):

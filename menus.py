@@ -46,10 +46,11 @@ def AccountOptions(account):
         print(f"===Your Worth: {account.totalValueGold}")
         choice = int(input("What would you like to do with your account?\n1: Save Coin\n2: Spend Coin\n3: Convert Coin\n4: Purchase History\n5: Return to Menu\nChoice: "))
         print("")
+
         match choice:
             case 1:
-                # Allow to add multiple coins at once, probably a while loop to start, or prompt all and enter 0
-                print("What coin are you adding?")
+                account.AddCoins()
+                 
 
             
 
@@ -73,5 +74,5 @@ def Party_List(accountList):
         if account.name.lower() == choice.lower():
             AccountOptions(account)
             return
-    print("No Matching Accounts, Please match your spelling in common. ")
+    print("No Matching Accounts, Please ensure you're spelling in common. ")
     #create the menu based on selecting who is using, by calling their class and using the methods on selection

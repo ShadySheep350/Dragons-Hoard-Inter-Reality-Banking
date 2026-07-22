@@ -21,4 +21,4 @@ A fun Python project I am working on for DM's and players to track their gold an
 
 # Disclaimer
 The idea and original ownership and idea belongs to AWCampbell, or Shady3Sheep. This code and program should not be sold, used for malicious intent, or training for AI.
-Editing of the code and additions/re-uploads for additional features or optimisation is ok with credit given.
+Editing of the code and additions/re-uploads for additional features or optimisation is ok with credit given (Link to My Git).
