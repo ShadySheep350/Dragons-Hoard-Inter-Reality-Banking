@@ -14,9 +14,9 @@ def HomeMenu(accountList):
                 account = accounts.Account(name)
                 accountList.append(account)
                 print(account.name +", Welcome to the Party. We hope you have coin!")
-                for coinType in account.currencies:
-                    amount = int(input(f"How many {coinType.__name__} coins do you have? "))
-                    account.currencies[coinType] = amount
+                for typeCoin in account.currencies:
+                    amount = int(input(f"How many {typeCoin.__name__} coins do you have? "))
+                    account.currencies[typeCoin] = amount
                 account.UpdateTotalValue()
                 print(f"You have {account.totalValueGold} total in gold")
                 if account.totalValueGold >= 3000:
