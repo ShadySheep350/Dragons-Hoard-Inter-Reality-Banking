@@ -3,9 +3,10 @@ import sys
 
 
 def HomeMenu(accountList):
-    print("\n====Dragons Hoard Inter-reality Banking services====\n")
     
     while True:
+        print("\n==== Dragons Hoard Inter-reality Banking Services ====\n")
+        print("\n=== Main Page ===\n")
         print("1: New Adventurer\n2: Party List\n3: Manage Party\n4: DungeonMaster's Tools\n5: Flee") 
         choice = int(input("Please make a selection: "))
         match choice:
@@ -13,9 +14,9 @@ def HomeMenu(accountList):
                 name = input("Welcome new member, please start by entering your name: ")
                 account = accounts.Account(name)
                 accountList.append(account)
-                print(account.name +", Welcome to the Party. We hope you have coin!")
+                print("\n" + account.name +", Welcome to the Party. We hope you have coin! Please tell us below.")
                 for typeCoin in account.currencies:
-                    amount = int(input(f"How many {typeCoin.__name__} coins do you have? "))
+                    amount = int(input(f"{typeCoin.__name__} coins: "))
                     account.currencies[typeCoin] = amount
                 account.UpdateTotalValue()
                 print(f"You have {account.totalValueGold} total in gold")
@@ -42,8 +43,8 @@ def HomeMenu(accountList):
 def AccountOptions(account):
     run = 1
     while run == 1:
-        print("\n==== "+ account.name + "'s DashBoard===\n")
-        print(f"===Your Worth: {account.totalValueGold}")
+        print("\n==== "+ account.name + "'s DashBoard===")
+        print(f"== Your Worth: {account.totalValueGold} ==\n")
         choice = int(input("What would you like to do with your account?\n1: Save Coin\n2: Spend Coin\n3: Convert Coin\n4: Purchase History\n5: Return to Menu\nChoice: "))
         print("")
 

@@ -8,6 +8,7 @@ A fun Python project I am working on for DM's and players to track their gold an
     # sort or search purchases
     # accounts for DM's with party gold total/spending logged, DM Loans ( d20 table on what intrest (one chicken leg, or 5X the loan back) is, as it is run by goblins)
     # logs Deposits and withdrawls on DM side, and updates party gold supply
+    #random changes/commentary (optional) That might effect transactions eg: Crog takes a random coin as a "fee" in a deposite or withdrawl, or Crog forgets count given, and you have to re-enter your amounts, etc. 
 
   # Potiental Future Ideas
     cloud saves and real time acounts that the DM and players can update and manage with different settings by roles

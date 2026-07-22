@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+import math
 
 class Coin(ABC):
     valueOfGold = 0
@@ -40,18 +41,25 @@ class Account():
         total = 0
         for typeCoin, amount in self.currencies.items():
             total += amount * typeCoin.valueOfGold
-        self.totalValueGold = round(total)
+        self.totalValueGold = math.floor(total)
 
-    def AddCoins(self,typeCoin,amount):
+    def AddCoins(self):
         for typeCoin in self.currencies:
-            amount = int(input(f"How many {typeCoin.__name__} coins will you deposit?"))
+            amount = int(input(f"How many {typeCoin.__name__} coins will you deposit? "))
             self.currencies[typeCoin] += amount
             self.UpdateTotalValue()
-        print(f"Crog our coin counter has finished sorting through your bag and made the requested deposit.\n Your new total value stands at {self.totalValueGold}\n Your collection is now the following")
-        for a in self.currencies:
-            print(f"{typeCoin.__name__}: {typeCoin.amount}")
+        print(f"Crog, our coin counter has finished sorting through your bag and made the requested deposit.\n Your new total value stands at {self.totalValueGold}\n Your collection is now the following")
+        for typeCoin in self.currencies:
+            print(f"{typeCoin.__name__}: {self.currencies[typeCoin]}")
 
     def RemoveCoins(self,typeCoin,amount):
-        pass
+        for typeCoin in self.currencies:
+            amount = int(input(f"How many {typeCoin.__name__} coins will you deposit? "))
+            self.currencies[typeCoin] -= amount
+            self.UpdateTotalValue()
+        print(f"Crog, our coin counter has finished sorting through your bag and made the requested withdrawl.\n Your new total value stands at {self.totalValueGold}\n Your collection is now the following")
+        for typeCoin in self.currencies:
+                   print(f"{typeCoin.__name__}: {self.currencies[typeCoin]}") 
     def ConvertCoins(self,typeCoin,amount,ToThisCoin):
-        pass
+        ToThisCoin = input("What coin are we converting too? ")
+        
