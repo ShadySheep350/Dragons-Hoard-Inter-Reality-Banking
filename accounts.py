@@ -3,10 +3,20 @@ import math
 
 class Coin(ABC):
     valueOfGold = 0
-    def convert(typeCoin,amount,toThisCoin):
-            coinConvert = (amount * typeCoin.valueOfGold) // toThisCoin.valueOfGold #Check this after this varible is alive somewhere else 
-            return coinConvert
-        
+
+    @staticmethod #got slightly stuck here, so a hint of AI
+    def convert(typeCoin, amount, toThisCoin):
+        convertedAmount = math.floor(
+            (amount * typeCoin.valueOfGold)
+            / toThisCoin.valueOfGold
+        )
+
+        coinsUsed = round(
+            (convertedAmount * toThisCoin.valueOfGold)
+            / typeCoin.valueOfGold
+        )
+
+        return convertedAmount, coinsUsed
     # will convert one amount of coin to the other coin. Will round down to the next coin
         #if going up to gold, coin.amount * valueOfgold
         #1 Copper (cp) = 0.01 gp1
@@ -60,6 +70,56 @@ class Account():
         print(f"Crog, our coin counter has finished sorting through your bag and made the requested withdrawl.\n Your new total value stands at {self.totalValueGold}\n Your collection is now the following")
         for typeCoin in self.currencies:
                    print(f"{typeCoin.__name__}: {self.currencies[typeCoin]}") 
-    def ConvertCoins(self,typeCoin,amount,ToThisCoin):
-        ToThisCoin = input("What coin are we converting too? ")
+
+    def ConvertCoins(self): #Ai method
+        coinTypes = {
+            "copper": Copper,
+            "silver": Silver,
+            "electrum": Electrum,
+            "gold": Gold,
+            "platinum": Platinum
+        }
+        fromChoice = input("What coin are you converting from? ").strip().lower()
+        toChoice = input("What coin are we converting to? ").strip().lower()
+        typeCoin = coinTypes.get(fromChoice)
+        toThisCoin = coinTypes.get(toChoice)
+
+        if typeCoin is None or toThisCoin is None:
+            print("That coin type was not recognized.")
+            return
+
+        amount = int(input(f"How many {typeCoin.__name__} coins are you converting? "))
+
+        if amount > self.currencies[typeCoin]:
+            print("You do not have that many coins.")
+            return
+
+        convertedAmount, coinsUsed = Coin.convert(
+            typeCoin,
+            amount,
+            toThisCoin
+        )
+
+        if convertedAmount == 0:
+            print(
+                f"You do not have enough {typeCoin.__name__} "
+                f"to create one {toThisCoin.__name__}."
+            )
+            return
+
+        self.currencies[typeCoin] -= coinsUsed
+        self.currencies[toThisCoin] += convertedAmount
+
+        self.UpdateTotalValue()
+
+        print(
+            f"Converted {coinsUsed} {typeCoin.__name__} "
+            f"into {convertedAmount} {toThisCoin.__name__}."
+        )
+
+        print(
+            f"The remaining {typeCoin.__name__} coins were "
+            f"returned to your account."
+        )
+        
         
