@@ -72,7 +72,7 @@ class Account():
                    print(f"{typeCoin.__name__}: {self.currencies[typeCoin]}") 
 
     def ConvertCoins(self): #Ai method
-        coinTypes = {
+        coinTypes = { # New dictionary to convert the input string to the key of the class 
             "copper": Copper,
             "silver": Silver,
             "electrum": Electrum,
@@ -94,17 +94,10 @@ class Account():
             print("You do not have that many coins.")
             return
 
-        convertedAmount, coinsUsed = Coin.convert(
-            typeCoin,
-            amount,
-            toThisCoin
-        )
+        convertedAmount, coinsUsed = Coin.convert(typeCoin,amount,toThisCoin)
 
         if convertedAmount == 0:
-            print(
-                f"You do not have enough {typeCoin.__name__} "
-                f"to create one {toThisCoin.__name__}."
-            )
+            print(f"You do not have enough {typeCoin.__name__} "f"to create one {toThisCoin.__name__}.")
             return
 
         self.currencies[typeCoin] -= coinsUsed
