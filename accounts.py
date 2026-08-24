@@ -19,7 +19,7 @@ class Coin(ABC):
         return convertedAmount, coinsUsed
     # will convert one amount of coin to the other coin. Will round down to the next coin
         #if going up to gold, coin.amount * valueOfgold
-        #1 Copper (cp) = 0.01 gp1
+        # Copper (cp) = 0.01 gp1
         # Silver (sp) = 0.1 gp1 
         # Electrum (ep) = 0.5 gp1
         #  Gold (gp) = 1.0 gp1 
@@ -64,9 +64,13 @@ class Account():
 
     def RemoveCoins(self,typeCoin,amount):
         for typeCoin in self.currencies:
-            amount = int(input(f"How many {typeCoin.__name__} coins will you deposit? "))
+            amount = int(input(f"How many {typeCoin.__name__} coins will you withdraw? "))
             self.currencies[typeCoin] -= amount
-            self.UpdateTotalValue()
+            if amount >= 0:
+                self.UpdateTotalValue()
+                print("Withdrawl successful, Enjoy your money.")
+            else: 
+               print("You don't have enough coin, please see our loan department.")
         print(f"Crog, our coin counter has finished sorting through your bag and made the requested withdrawl.\n Your new total value stands at {self.totalValueGold}\n Your collection is now the following")
         for typeCoin in self.currencies:
                    print(f"{typeCoin.__name__}: {self.currencies[typeCoin]}") 
