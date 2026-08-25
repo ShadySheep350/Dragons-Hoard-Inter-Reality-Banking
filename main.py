@@ -3,7 +3,6 @@ import menus
 import accounts
 
 def main():
-    print("This is a test push")
     accountList = []
     menus.HomeMenu(accountList)
     
