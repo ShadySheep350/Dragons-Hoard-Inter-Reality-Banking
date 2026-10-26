@@ -50,11 +50,27 @@ def AccountOptions(account):
 
         match choice:
             case 1:
-                account.AddCoins()
-                 
+                for typeCoin in account.currencies:
+                        amount = int(input(f"How many {typeCoin.__name__} coins will you deposit? "))
+                        account.AddCoins(typeCoin, amount)
+                print(f"Crog, our coin counter has finished sorting through your bag and made the requested deposit.\n Your new total value stands at {account.totalValueGold}\n Your collection is now the following")
 
+                for typeCoin in account.currencies:
+                    print(f"{typeCoin.__name__}: {account.currencies[typeCoin]}")
+
+                    
+            case 2:
+                for typeCoin in account.currencies:
+                    amount = int(input(f"How many {typeCoin.__name__} coins will you withdraw? "))
+                    account.RemoveCoins(typeCoin,amount)
+
+                print(f"Crog, our coin counter has finished sorting through your bag and made the requested withdrawl.\n Your new total value stands at {account.totalValueGold}\n Your collection is now the following")
+
+                for typeCoin in account.currencies:
+                    print(f"{typeCoin.__name__}: {account.currencies[typeCoin]}") 
+        
+            # TODO  Other menu cases 
             
-
             case 5:
                 run = 0
 

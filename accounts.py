@@ -39,7 +39,7 @@ class Platinum(Coin):
 class Account():
     def __init__(self, name):
         self.name = name
-        self.totalValueGold = ""
+        self.totalValueGold = 0
         self.currencies = {
             Copper: 0,
             Silver: 0,
@@ -53,27 +53,24 @@ class Account():
             total += amount * typeCoin.valueOfGold
         self.totalValueGold = math.floor(total)
 
-    def AddCoins(self):
-        for typeCoin in self.currencies:
-            amount = int(input(f"How many {typeCoin.__name__} coins will you deposit? "))
-            self.currencies[typeCoin] += amount
-            self.UpdateTotalValue()
-        print(f"Crog, our coin counter has finished sorting through your bag and made the requested deposit.\n Your new total value stands at {self.totalValueGold}\n Your collection is now the following")
-        for typeCoin in self.currencies:
-            print(f"{typeCoin.__name__}: {self.currencies[typeCoin]}")
+    def AddCoins(self, typeCoin, amount):
+        if amount > 0:
+                self.currencies[typeCoin] += amount
+                self.UpdateTotalValue()
+        else:
+                print("You can't get something from nothing. Nice try.")
+        
 
     def RemoveCoins(self,typeCoin,amount):
-        for typeCoin in self.currencies:
-            amount = int(input(f"How many {typeCoin.__name__} coins will you withdraw? "))
+        checkWithdrawl = self.currencies[typeCoin] - amount
+
+        if amount >= 0 and checkWithdrawl >= 0:
             self.currencies[typeCoin] -= amount
-            if amount >= 0:
-                self.UpdateTotalValue()
-                print("Withdrawl successful, Enjoy your money.")
-            else: 
-               print("You don't have enough coin, please see our loan department.")
-        print(f"Crog, our coin counter has finished sorting through your bag and made the requested withdrawl.\n Your new total value stands at {self.totalValueGold}\n Your collection is now the following")
-        for typeCoin in self.currencies:
-                   print(f"{typeCoin.__name__}: {self.currencies[typeCoin]}") 
+            self.UpdateTotalValue()
+            print("Withdrawl successful, Enjoy your money.")
+        else: 
+            print("You don't have enough coin, please see our loan department.")
+        
 
     def ConvertCoins(self): #Ai method
         coinTypes = { # New dictionary to convert the input string to the key of the class 
